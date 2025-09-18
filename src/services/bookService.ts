@@ -209,3 +209,8 @@ export const returnBook = (id: string): Book | null => {
 export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
 };
+
+export const getBookById = (id: string): Book | null => {
+  const book = books.find((b) => b.id === id);
+  return book ? structuredClone(book) : null;
+};
