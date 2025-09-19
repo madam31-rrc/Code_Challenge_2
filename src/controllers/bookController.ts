@@ -124,3 +124,17 @@ export const getRecommendations = (req: Request, res: Response): void => {
         });
     }
 };
+
+export const getStats = (req: Request, res: Response): void => {
+  try {
+    const stats = bookService.getStats();
+    res.status(HTTP_STATUS.OK).json({
+      message: "Statistics retrieved",
+      data: stats,
+    });
+  } catch {
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      message: "Error retrieving statistics",
+    });
+  }
+};
