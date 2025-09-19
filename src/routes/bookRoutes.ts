@@ -7,6 +7,7 @@ import {
     borrowBook,
     returnBook,
     getRecommendations,
+    getStats
 } from "../controllers/bookController";
 
 const router: Router = Router();
@@ -20,6 +21,7 @@ router.put("/:id", updateBook);
 router.delete("/:id", deleteBook);
 router.post("/:id/borrow", borrowBook);
 router.post("/:id/return", returnBook);
+router.get("/stats", getStats); 
 router.get("/recommendations", getRecommendations);
 
 export default router;
