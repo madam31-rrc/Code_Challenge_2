@@ -210,3 +210,22 @@ export const getRecommendations = (): Book[] => {
     return structuredClone(books.slice(0, 3));
 };
 
+export interface LibraryStats {
+  totalBooks: number;
+  availableBooks: number;
+  borrowedBooks: number;
+  genreBreakdown: Record<string, number>;
+}
+
+export const getStats = (): LibraryStats => {
+  const totalBooks = books.length;
+  const borrowedBooks = books.filter(b => b.isBorrowed).length;
+  const availableBooks = totalBooks - borrowedBooks;
+
+  const genreBreakdown = books.reduce<Record<string, number>>((acc, b) => {
+    acc[b.genre] = (acc[b.genre] ?? 0) + 1;
+    return acc;
+  }, {});
+
+  return { totalBooks, availableBooks, borrowedBooks, genreBreakdown };
+};
